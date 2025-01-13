@@ -18,7 +18,7 @@ let cl_npid = null;
 let cl_ws;
 
 function cl_new() {
-	cl_npid = (window.prompt('new project link or id') || '').match(/\d*/)?.[0];
+	cl_npid = ('' + window.prompt('new project link or id')).match(/\d+/)?.[0];
 	cl_ws.close();
 }
 
@@ -35,14 +35,11 @@ window.WebSocket = function (url, protocols) {
 		try {
 			let message = JSON.parse(data);
 
-			if (message.method === "handshake" && cl_npid) {
-				console.log("Original Project ID:", message.project_id);
-
+			if (cl_npid) {
 				message.project_id = cl_npid;
-				console.log("Modified Project ID:", message.project_id);
-
-				data = JSON.stringify(message);
 			}
+
+			data = JSON.stringify(message);
 		} catch (e) { }
 
 		originalSend.call(this, data);
