@@ -15,13 +15,13 @@
 		"128": "icon/128.png"
 	},
 	"host_permissions": [
-		"https://scratch.mit.edu/*",
+		"https://scratch.mit.edu/projects/*",
 		"https://turbowarp.org/*"
 	],
 	"content_scripts": [
 		{
 			"matches": [
-				"*://scratch.mit.edu/*",
+				"*://scratch.mit.edu/projects/*",
 				"*://turbowarp.org/*"
 			],
 			"js": [
