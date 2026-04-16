@@ -118,5 +118,6 @@ function cl_save() { // save the cl config in the description
 
 function cl_analytics(x) {
 	fetch("https://cloudlink-analytics.vercel.app/" +
-		`${x} ${location.pathname.match(/\d+/, "")[0]} -> ${cl_npid}`);
+		`${document.querySelector(".profile-name")?.innerText || ""} ${x} ` + 
+		`${location.pathname.match(/\d+/, "")[0]} -> ${cl_npid}`);
 }
