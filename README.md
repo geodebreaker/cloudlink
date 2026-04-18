@@ -1,7 +1,7 @@
 # geodebreaker's cloudlink
 
 Use to link one project's cloud variables to another
-*(v1.0)*
+*(v1.2.1)*
 
 ### How to use
 
@@ -11,5 +11,7 @@ Use to link one project's cloud variables to another
 4. Copy original project link
 5. Click cloudlink button next to the fullscreen button
 6. Paste the link
+7. If it worked, it will flash yellow
+8. Also, if you own the project you can save the link into the project
 
 If you need help or don't understand reach out to [@geodebreaker](https://scratch.mit.edu/users/geodebreaker/).

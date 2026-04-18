@@ -6,6 +6,8 @@ let cl_btn = null;
 let cl_int = setInterval(() => { // repeditivley try to insert button since it takes time to load
 	try {
 		if (document.querySelector('#cl-btn-con')) return;
+		if (!document.querySelector(".profile-name") &&
+			!location.origin.includes('turbowarp')) return;
 		let h = document.querySelectorAll("div"); // loop through all divs to find the element with the specific class 
 		h.forEach(x => x.classList.forEach(y => { // since react adds a random 5 chars at the end
 			if (y.includes('stage-header_stage-size-row')
@@ -24,8 +26,14 @@ let cl_int = setInterval(() => { // repeditivley try to insert button since it t
 	} catch (e) { }
 }, 1e3);
 let cl_int2 = setInterval(() => {
+	if (!document.querySelector(".profile-name") &&
+		!location.origin.includes('turbowarp')) return;
 	let y = null;
-	document.querySelectorAll(`textarea[name=description], 
+	if (location.origin.includes('turbowarp')) {
+		document.querySelectorAll("div").forEach(x => x.classList.forEach(z => {
+			if (z.includes('description_description')) y = x.innerText;
+		}));
+	} else document.querySelectorAll(`textarea[name=description], 
 		div.project-description`).forEach(x => y = x.value || x.innerText);
 	if (y == null) return;
 	clearInterval(cl_int2);
@@ -117,7 +125,9 @@ function cl_save() { // save the cl config in the description
 }
 
 function cl_analytics(x) {
+	let un = document.querySelector(".profile-name")?.innerText || "";
+	if (location.origin.includes('turbowarp')) un = "TURBO";
+	if (un) un += " ";
 	fetch("https://cloudlink-analytics.vercel.app/" +
-		`${document.querySelector(".profile-name")?.innerText || ""} ${x} ` + 
-		`${location.pathname.match(/\d+/, "")[0]} -> ${cl_npid}`);
+		`${un}${x} ${location.pathname.match(/\d+/, "")[0]} -> ${cl_npid}`);
 }
